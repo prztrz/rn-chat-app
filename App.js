@@ -1,7 +1,7 @@
 // @flow
 
 import React, { Component } from 'react';
-import { Platform, StyleSheet, Text, View, Button } from 'react-native';
+import { Platform, StyleSheet, Text, SafeAreaView, Button } from 'react-native';
 import ChatListScreen from './src/screens/ChatListScreen';
 import ChatViewScreen from './src/screens/ChatViewScreen';
 import Toggle from './src/components/Toggle';
@@ -16,7 +16,7 @@ const instructions = Platform.select({
 export default class App extends Component<{}> {
   render() {
     return (
-      <View style={styles.container}>
+      <SafeAreaView style={styles.container}>
         <Toggle>
           {({ isActive, toggle }) => (
             <React.Fragment>
@@ -25,7 +25,7 @@ export default class App extends Component<{}> {
             </React.Fragment>
           )}
         </Toggle>
-      </View>
+      </SafeAreaView>
     );
   }
 }
@@ -33,7 +33,7 @@ export default class App extends Component<{}> {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
+    justifyContent: 'space-between',
     alignItems: 'center',
     backgroundColor: '#F5FCFF'
   }
