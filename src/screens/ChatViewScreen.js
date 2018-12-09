@@ -58,15 +58,33 @@ class ChatViewScreen extends React.Component<NavigationScreenProps, State> {
     this.setState({ isLoading: false });
   }
 
-  __renderItem = ({ item }: { item: $ElementType<typeof mockMessages, 0> }) => (
-    <Message incoming={item.incoming}>{item.message}</Message>
+  async;
+
+  renderItem = ({ item }: { item: $ElementType<typeof mockMessages, 0> }) => (
+    <Message incoming={item.incoming}>
+      {console.log({ item })}
+      {item.message}
+    </Message>
   );
 
   setMsgText = (msgText: string) => this.setState({ msgText });
 
+  submit = async (msgText: string) => {
+    Keyboard.dismiss();
+    this.setState({ msgText: '' });
+    postMessage(msgText);
+    let data;
+    try {
+      data = await getMessagesById();
+    } catch (err) {
+      console.log('err', err);
+    }
+
+    this.setState({ data: data.slice(), msgText: '' });
+  };
+
   render() {
     const { isLoading, data, msgText } = this.state;
-    console.log({ data, isLoading });
     return (
       <ImageBackground
         source={require('../assets/imgs/background.png')}
@@ -86,17 +104,13 @@ class ChatViewScreen extends React.Component<NavigationScreenProps, State> {
               <FlatList
                 data={data}
                 keyExtractor={item => item.id}
-                renderItem={this.__renderItem}
+                renderItem={this.renderItem}
               />
             </View>
             <Compose
               text={msgText}
               onChangeText={this.setMsgText}
-              onSubmit={() => {
-                postMessage(msgText);
-                this.setState({ msgText: '' });
-                Keyboard.dismiss();
-              }}
+              onSubmit={() => this.submit(msgText)}
             />
           </KeyboardAvoidingView>
         )}

@@ -2,6 +2,7 @@
 
 import * as React from 'react';
 import { View, Text, StyleSheet, Image } from 'react-native';
+import * as Animatable from 'react-native-animatable';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import Column from './Column';
 
@@ -9,14 +10,19 @@ type Props = {|
   incoming?: boolean,
   children?: string
 |};
+
 export default ({ incoming, children }: Props) => (
-  <View style={styles.container}>
+  <Animatable.View
+    animation={incoming ? 'slideInLeft' : 'slideInRight'}
+    duration={100}
+    style={styles.container}
+  >
     <Column alignItems={incoming ? 'start' : 'end'}>
       <View style={[styles.msg, incoming && styles.incoming]}>
         <Text>{children}</Text>
       </View>
     </Column>
-  </View>
+  </Animatable.View>
 );
 
 const styles = StyleSheet.create({
