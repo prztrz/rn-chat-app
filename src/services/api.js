@@ -20,6 +20,20 @@ export const chats = [
     description: 'Hey there',
     avatar: 'http://www.codetic.net/demo/templates/Privado/img/avatar.png',
     messages: mockMessages
+  },
+  {
+    id: '124',
+    title: 'John',
+    description: 'Hey there',
+    avatar: 'http://www.codetic.net/demo/templates/Privado/img/avatar.png',
+    messages: mockMessages
+  },
+  {
+    id: '125',
+    title: 'John',
+    description: 'Hey there',
+    avatar: 'http://www.codetic.net/demo/templates/Privado/img/avatar.png',
+    messages: mockMessages
   }
 ];
 

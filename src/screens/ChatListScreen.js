@@ -3,12 +3,14 @@
 import * as React from 'react';
 import { View, Text, FlatList, StyleSheet } from 'react-native';
 import Item from '../components/ChatListItem';
+import LineSeparator from '../components/LineSeparator';
 import { getChats, chats } from '../services/api';
 
 type State = {
   data: ?typeof chats,
   isLoading: boolean
 };
+
 class ChatListScreen extends React.Component<{}, State> {
   state = { data: null, isLoading: false };
 
@@ -47,6 +49,7 @@ class ChatListScreen extends React.Component<{}, State> {
             data={data}
             keyExtractor={item => item.id}
             renderItem={this.__renderItem}
+            ItemSeparatorComponent={LineSeparator}
           />
         )}
       </View>
