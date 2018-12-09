@@ -1,9 +1,16 @@
 // @flow strict
 
 import * as React from 'react';
-import { View, Text, FlatList, StyleSheet } from 'react-native';
+import {
+  View,
+  Text,
+  FlatList,
+  StyleSheet,
+  TouchableOpacity
+} from 'react-native';
 import Item from '../components/ChatListItem';
 import LineSeparator from '../components/LineSeparator';
+import type { NavigationScreenProps } from 'react-navigation';
 import { getChats, chats } from '../services/api';
 
 type State = {
@@ -11,7 +18,7 @@ type State = {
   isLoading: boolean
 };
 
-class ChatListScreen extends React.Component<{}, State> {
+class ChatListScreen extends React.Component<NavigationScreenProps, State> {
   state = { data: null, isLoading: false };
 
   async componentDidMount() {
@@ -29,11 +36,17 @@ class ChatListScreen extends React.Component<{}, State> {
   }
 
   __renderItem = ({ item }: { item: $ElementType<typeof chats, 0> }) => (
-    <Item
-      avatar={item.avatar}
-      title={item.title}
-      description={item.description}
-    />
+    <TouchableOpacity
+      onPress={() =>
+        this.props.navigation.navigate('ChatView', { title: item.title })
+      }
+    >
+      <Item
+        avatar={item.avatar}
+        title={item.title}
+        description={item.description}
+      />
+    </TouchableOpacity>
   );
 
   render() {

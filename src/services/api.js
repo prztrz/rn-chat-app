@@ -42,3 +42,10 @@ export const getChats = () =>
 
 export const getMessagesById = (id?: string) =>
   new Promise(resolve => setTimeout(() => resolve(mockMessages), 1000));
+
+export const postMessage = (message: string) =>
+  mockMessages.push({
+    id: String(mockMessages.length + 1),
+    incoming: false,
+    message
+  });
